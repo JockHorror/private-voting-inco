@@ -108,6 +108,18 @@ Here is a minimal usage flow:
 
 ---
 
-📌 Дальше у нас останется только **Roadmap** и **License** → и у тебя будет полный README.  
+---
 
-Когда вставишь usage example — скинь скрин, и перейдём к финалу.
+## 4. Roadmap
+
+- [x] MVP Commit–Reveal contract  
+- [x] Remix deployment guide  
+- [x] Minimal usage example  
+- [ ] Frontend integration demo  
+- [ ] End-to-end private voting dApp  
+
+---
+
+## 5. License
+
+This project is licensed under the MIT License — see the [LICENSE](./LICENSE) file for details.
