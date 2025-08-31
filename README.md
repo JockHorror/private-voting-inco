@@ -84,3 +84,24 @@ Follow these steps to deploy the contract using [Remix IDE](https://remix.ethere
    - The final result is stored on-chain.
 
 ---
+---
+
+## 3. Usage example
+
+Here is a minimal usage flow:
+
+1. **Generate commitment**  
+   ```js
+   // Example in JavaScript
+   const { keccak256, toUtf8Bytes } = require("ethers");
+
+   const vote = "yes";              // your vote
+   const secret = "mySecret123";    // random secret
+   const commitment = keccak256(
+       ethers.utils.defaultAbiCoder.encode(
+           ["string", "string"],
+           [vote, secret]
+       )
+   );
+
+   console.log("Commitment:", commitment);
