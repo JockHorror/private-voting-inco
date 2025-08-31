@@ -25,3 +25,26 @@ This pattern is a natural fit for confidential apps that can be extended with **
 3. Usage example  
 4. Roadmap  
 5. License
+---
+
+## 1. How it works (Commit–Reveal)
+
+The contract follows a **two-phase process**:
+
+1. **Commit phase**  
+   - Each voter submits a hash of their choice and a secret.  
+   - Hash format: `keccak256(vote, secret)`.  
+   - The contract only stores commitments, not the actual votes.
+
+2. **Reveal phase**  
+   - Once the commit deadline has passed, voters reveal their choice by providing `(vote, secret)`.  
+   - The contract recomputes the hash and checks that it matches the original commitment.  
+   - Valid reveals are counted toward the final result.
+
+3. **Tally**  
+   - After the reveal period ends, the contract aggregates results.  
+   - Any unrevealed commitments are ignored.
+
+This scheme ensures **privacy during the commit stage** while still enabling transparent verification once votes are revealed.
+
+---
