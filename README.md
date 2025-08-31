@@ -1,35 +1,27 @@
-# Private Voting Example (Inco Builders MVP)
+# Private Voting (Inco Builders MVP)
 
-Минимальный пример приватного голосования на Solidity по схеме **commit → reveal**.  
-Нужен как **proof-of-concept** для заявки билдеров в экосистему **Inco**.
+> Minimal commit–reveal voting contract in Solidity. Built as a proof-of-concept for the **Inco** ecosystem.
 
-## Идея
-1) Во время *commit*-фазы участник отправляет хэш своего голоса + секрет: `keccak256(vote, secret)`.
-2) После дедлайна (*reveal*-фаза) участник раскрывает голос и секрет. Контракт проверяет соответствие.
-3) До завершения коммита голоса не раскрываются.
+![License](https://img.shields.io/badge/license-MIT-informational)
+![Solidity](https://img.shields.io/badge/solidity-%5E0.8.20-blue)
+![Status](https://img.shields.io/badge/status-MVP-success)
 
-## Как это связано с Inco
-В проде голосование/подсчёт можно выполнять внутри **Inco Lightning (TEE)** или **Inco Atlas (FHE/MPC)**,
-а доступ к данным управлять через **programmable access control**. Данный контракт — простой MVP.
+A tiny smart contract that demonstrates **private voting** without revealing a voter’s choice during the commit phase.  
+Voters first submit a hashed commitment (`keccak256(vote, secret)`), and later **reveal** their vote with the same `secret`.  
+This pattern is a natural fit for confidential apps that can be extended with **Inco Lightning** (TEE) and **Inco Atlas** (FHE/MPC).
 
-## Развёртывание через Remix
-1. Откройте https://remix.ethereum.org/
-2. Создайте файл `contracts/PrivateVoting.sol` и вставьте код из этого репозитория.
-3. Компилятор: Solidity ^0.8.20 → Compile.
-4. Deploy: укажите параметр конструктора — длительность коммит-фазы в секундах (например, `300`).
-5. Вызовите функции:
-   - `computeCommit(true, "mySecret")` → скопируйте bytes32.
-   - `commitVote(<bytes32 из шага выше>)` до истечения дедлайна.
-   - После дедлайна вызовите `revealVote(true, "mySecret")`.
-   - Посмотрите результат через `result()`.
+---
 
-> Примечание: для тестов можно использовать Remix VM или подключить Metamask (Sepolia и т.п.).
+## Quick links
+- **Contract:** [`contracts/PrivateVoting.sol`](contracts/PrivateVoting.sol)  
+- **Flow:** commit → deadline → reveal → tally  
+- **Why Inco:** add verifiable confidential execution (Lightning) and full data privacy & programmable access control (Atlas).
 
-## Роудмап улучшений
-- Ограничение по числу участников/регистрация списков.
-- Мульти-вариантные голосования.
-- Приватная генерация случайности для розыгрышей (примитив Inco).
-- Интеграция с Inco SDK для on-chain приватности.
+---
 
-## Лицензия
-MIT
+## Table of Contents
+1. How it works (Commit–Reveal)  
+2. Deploy with Remix (step-by-step)  
+3. Usage example  
+4. Roadmap  
+5. License
