@@ -48,3 +48,39 @@ The contract follows a **two-phase process**:
 This scheme ensures **privacy during the commit stage** while still enabling transparent verification once votes are revealed.
 
 ---
+---
+
+## 2. Deploy with Remix (step-by-step)
+
+Follow these steps to deploy the contract using [Remix IDE](https://remix.ethereum.org):
+
+1. **Open Remix**  
+   - Go to [remix.ethereum.org](https://remix.ethereum.org).  
+   - Create a new file `PrivateVoting.sol` under the `contracts/` folder.  
+   - Copy-paste the contract code from `contracts/PrivateVoting.sol`.
+
+2. **Compile the contract**  
+   - Select the **Solidity Compiler** tab.  
+   - Ensure the version matches `0.8.20`.  
+   - Click **Compile PrivateVoting.sol**.
+
+3. **Deploy**  
+   - Open the **Deploy & Run Transactions** tab.  
+   - Select `PrivateVoting` from the contract dropdown.  
+   - Configure parameters (e.g. commitDeadline, revealDeadline).  
+   - Click **Deploy**.
+
+4. **Commit a vote**  
+   - Call `commitVote(bytes32 commitment)`.  
+   - Generate the commitment using `keccak256(vote, secret)` locally.  
+   - Submit the hash to the contract.
+
+5. **Reveal a vote**  
+   - After the commit phase ends, call `revealVote(vote, secret)`.  
+   - The contract verifies the hash and counts the vote.
+
+6. **Check results**  
+   - Once the reveal deadline has passed, call `tallyVotes()`.  
+   - The final result is stored on-chain.
+
+---
